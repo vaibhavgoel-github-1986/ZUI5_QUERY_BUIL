@@ -1,0 +1,293 @@
+.sapContrast.sapMMessageToast,
+.sapContrast .sapMMessageToast {
+    width: 410px !important;
+    text-decoration: none;
+    font-weight: bold;
+    color: #e71818;
+    background: #ffffff !important;
+    box-shadow: 0 0 1.875rem 0 rgba(0, 0, 0, 0.18), 0 0 0 0px rgb(255, 255, 255);
+}
+
+.sapMMessageToast {
+    box-sizing: border-box;
+    max-width: 100%;
+    word-wrap: break-word;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: pre-line;
+    font-size: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 1rem;
+    border-radius: 0.25rem;
+}
+
+.sapMGT:focus .sapMGTFocusDiv,
+.sapMGT:active .sapMGTFocusDiv,
+.sapMGTLineModePress .sapMGTFocusDiv {
+    border: none !important;
+}
+
+.sapMBtn:focus>.sapMFocusable {
+    outline: none !important;
+}
+
+.sapMPanelContent {
+    padding: 0px !important;
+}
+
+.sapMPanelContent:not(.sapMPanelBGTransparent) {
+    border-bottom: 0px !important;
+}
+
+.sapMPanelHdr {
+    font-size: 15px !important;
+    height: 30px !important;
+    line-height: 30px !important;
+    color: #0d499d !important;
+}
+
+.sapUiSizeCompact .sapMTB.sapMTBHeader-CTX {
+    height: 32px !important;
+}
+
+.zep_TableMainBox .sapMLIB {
+    border-bottom: 0px !important;
+}
+
+.zep_joinConditions .sapMLIB {
+    border-bottom: 0px !important;
+}
+
+.sapMText {
+    cursor: grab !important;
+}
+
+.sapMLIBFocusable:focus {
+    outline: none !important;
+}
+
+.sapMTB-Transparent-CTX.sapMTB {
+    padding: 0 !important;
+}
+
+.sapMPanelBGTranslucent {
+    background-color: white;
+}
+
+html.sap-desktop .sapMSwtCont:focus>.sapMSwt {
+    outline: none;
+}
+
+.ace_content {
+    font-size: 14px;
+}
+
+.zep_TableKey {
+    font-weight: bold;
+    color: #4545e9;
+}
+
+.zep_TableBox {
+    -webkit-box-shadow: 3px 5px 10px 2px #dde0e3;
+    -moz-box-shadow: 3px 5px 10px 2px #dde0e3;
+    box-shadow: 3px 5px 10px 2px #dde0e3;
+    border: 1px solid rgb(169, 166, 166);
+    margin: 1rem 1rem;
+    transition-duration: 0.3s;
+}
+
+
+/*
+.zep_TableBox:hover {
+    transform: scale(1.06);
+}
+*/
+
+.zep_LinkHighlight {
+    border: 1.5px solid rgba(163, 231, 164, 0.46);
+    border-bottom: 1.5px solid rgba(163, 231, 164, 0.46) !important;
+}
+
+.zep_TableList {
+    padding-left: 10px;
+}
+
+.zep_TableMainBox {
+    display: inline-flex
+}
+
+.zep_TableJoinLink {
+    font-size: 24px;
+    top: 145px;
+}
+
+.zep_LinkHBox {
+    box-sizing: border-box;
+    padding-top: 8px;
+    width: 100%;
+    cursor: grab;
+}
+
+.zep_Switch .sapMSwtOn:not(.sapMSwtAcceptReject) {
+    background: rgb(247, 247, 247) !important
+    /* background: #2ea70f !important;*/
+}
+
+.zep_Switch .sapMSwtOff:not(.sapMSwtAcceptReject) {
+    background: rgb(247, 247, 247) !important
+    /* background: hsl(33, 85%, 57%) !important*/
+}
+
+.zep_Switch .sapMSwtOff .sapMSwtHandle {
+    border-color: #ffffff !important;
+}
+
+.zep_Switch .sapMSwtOff .sapMSwtText {
+    /*color: #ffffff !important;*/
+    color: hsl(33, 85%, 57%) !important;
+}
+
+.zep_Switch .sapMSwtOn .sapMSwtText {
+    /*color: #ffffff !important;*/
+    color: #2ea70f !important;
+}
+
+.zep_Switch .sapMSwtLabel {
+    text-transform: none !important;
+}
+
+.zep_Switch .sapMSwtOn .sapMSwtHandle {
+    border: 2px solid #aeaeae !important;
+}
+
+.zep_Switch .sapMSwtOff .sapMSwtHandle {
+    border: 2px solid #aeaeae !important;
+}
+
+.zep_Switch .sapMSwtOn:not(.sapMSwtAcceptReject) {
+    border-color: #ababab !important;
+}
+
+.zep_ListFields:nth-child(odd) {
+    background-color: #efefef;
+}
+
+
+/*------Code Editor Animation------------------------*/
+
+@-webkit-keyframes typing {
+    from {
+        width: 0
+    }
+    to {
+        width: 350px
+    }
+}
+
+@-moz-keyframes typing {
+    from {
+        width: 0
+    }
+    to {
+        width: 350px
+    }
+}
+
+@-webkit-keyframes blink-caret {
+    from,
+    to {
+        border-color: transparent
+    }
+    50% {
+        border-color: black
+    }
+}
+
+@-moz-keyframes blink-caret {
+    from,
+    to {
+        border-color: transparent
+    }
+    50% {
+        border-color: black
+    }
+}
+
+.zep_TextAnimate {
+    overflow: hidden;
+    /* border-right: .1em solid black;*/
+    -webkit-animation: typing 3s steps(40, end), /* # of steps = # of characters */
+    blink-caret 1s step-end 3;
+    -moz-animation: typing 3s steps(40, end), /* # of steps = # of characters */
+    blink-caret 1s step-end 3;
+}
+
+
+/*-------------------------------------------------*/
+
+
+/*-------------For Flashing-------------------------*/
+
+.animated {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+@keyframes flash {
+    0%,
+    50%,
+    100% {
+        opacity: 1;
+    }
+    25%,
+    75% {
+        opacity: 0;
+    }
+}
+
+.flash {
+    animation-name: flash;
+}
+
+
+/*-------------------------------------------------*/
+
+
+/*-------------Pusling effect------------*/
+
+.pulse {
+    box-shadow: 0 0 0 rgb(12, 106, 239);
+    animation: pulse 2s infinite;
+}
+
+@-webkit-keyframes pulse {
+    0% {
+        -webkit-box-shadow: 0 0 0 0 rgb(12, 106, 239);
+    }
+    70% {
+        -webkit-box-shadow: 0 0 0 10px rgba(204, 169, 44, 0);
+    }
+    100% {
+        -webkit-box-shadow: 0 0 0 0 rgba(204, 169, 44, 0);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        -moz-box-shadow: 0 0 0 0 rgb(12, 106, 239);
+        box-shadow: 0 0 0 0 rgb(12, 106, 239);
+    }
+    70% {
+        -moz-box-shadow: 0 0 0 10px rgba(204, 169, 44, 0);
+        box-shadow: 0 0 0 10px rgba(204, 169, 44, 0);
+    }
+    100% {
+        -moz-box-shadow: 0 0 0 0 rgba(204, 169, 44, 0);
+        box-shadow: 0 0 0 0 rgba(204, 169, 44, 0);
+    }
+}
+
+
+/*-------------------------------------------------*/

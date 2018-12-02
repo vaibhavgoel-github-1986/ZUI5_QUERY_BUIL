@@ -1,0 +1,70 @@
+<mvc:View controllerName="com.nvidia.vebs.controller.QueryBuilder" height="100%" xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core"
+	xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:dnd="sap.ui.core.dnd" xmlns:code="sap.ui.codeeditor">
+	<Page showHeader="false" title="Select Query Builder">
+		<subHeader>
+			<Toolbar design="Solid">
+				<Button class="sapUiSizeCompact sapUiTinyMarginBegin" text="Add Table" icon="sap-icon://sys-add" press="onAddTable"/>
+				<Button class="sapUiSizeCompact" text="Propose Join Conditions" icon="sap-icon://share-2" press="onAutoJoin" visible="true"/>
+				<ToolbarSpacer/>
+				<Title text="Select Query Builder" level="H4"/>
+				<ToolbarSpacer/>
+				<Button class="sapUiSizeCompact" text="Generate Code" icon="sap-icon://source-code" press="onFullCode"/>
+				<Label id="idLabel" text="Live Code"/>
+				<Switch id="idLiveCodeBtn" class="sapUiSizeCompact" type="Default" change="onSwitchToggle" state="false" ariaLabelledBy="idLabel"/>
+			</Toolbar>
+		</subHeader>
+		<content>
+			<l:Splitter height="100%" width="100%" orientation="Horizontal">
+				<Panel id="idLeftPanel" height="100%" width="100%" class="sapUiTinyMarginBegin">
+					<layoutData><l:SplitterLayoutData size="100%"/></layoutData>
+					<List id="idListTabBoxes" class="zep_TableMainBox" width="100%" showNoData="false">
+						<dragDropConfig>
+							<dnd:DragDropInfo dropEffect="Move" dropLayout="Default" sourceAggregation="items" targetAggregation="items" dropPosition="On"
+								drop="onDropTabBox"/>
+						</dragDropConfig>
+					</List>
+				</Panel>
+				<l:Splitter height="100%" width="100%" orientation="Vertical">
+					<Panel height="100%" width="auto">
+						<layoutData><l:SplitterLayoutData size="40%"/></layoutData>
+						<code:CodeEditor id="idOutputCode" height="800px" width="350px" lineNumbers="true" type="abap" editable="false" valueSelection="false"></code:CodeEditor>
+					</Panel>
+					<Panel height="100%" width="auto" class="sapUiSizeCompact" headerText="Manage Output Fields">
+						<layoutData><l:SplitterLayoutData size="60%"/></layoutData>
+						<List id="idListFields" class="sapUiSizeCompact" width="auto" showNoData="false"
+							items="{ path: 'oModelSelFields>/', sorter: [{ path: 'Counter', descending: false}]}" backgroundDesign="Translucent">
+							<dragDropConfig>
+								<dnd:DragDropInfo dropEffect="Move" dropLayout="Default" sourceAggregation="items" targetAggregation="items" dropPosition="Between"
+									drop="onReorderFields"/>
+							</dragDropConfig>
+							<headerToolbar>
+								<Toolbar design="Transparent" style="Clear">
+									<VBox width="100%">
+										<SearchField width="100%" showSearchButton="true" liveChange="_onFieldSearch" placeholder="Table Name, Field Name"/>
+									</VBox>
+								</Toolbar>
+							</headerToolbar>
+							<items>
+								<CustomListItem class="zep_ListFields">
+									<customData>
+										<core:CustomData key="Tabname" value="{oModelSelFields>Tabname}"/>
+										<core:CustomData key="Fieldname" value="{oModelSelFields>Fieldname}"/>
+									</customData>
+									<HBox width="100%">
+										<HBox class="zep_LinkHBox">
+											<Text class="sapUiTinyMarginBegin sapUiTinyMarginEnd" width="17px"
+												text="{path: 'oModelSelFields>Counter', type: 'sap.ui.model.type.Integer'}"/>
+											<Text class="sapUiMediumMarginEnd" width="140px" text="{oModelSelFields>Tabname}-{oModelSelFields>Fieldname}"/>
+										</HBox>
+										<Input class="sapUiTinyMarginEnd" placeholder="Field Alias" maxLength="30" width="120px" value="{oModelSelFields>FieldAlias}"
+											liveChange="onFieldAlias" submit="_onFieldAliasSubmit"/>
+									</HBox>
+								</CustomListItem>
+							</items>
+						</List>
+					</Panel>
+				</l:Splitter>
+			</l:Splitter>
+		</content>
+	</Page>
+</mvc:View>
