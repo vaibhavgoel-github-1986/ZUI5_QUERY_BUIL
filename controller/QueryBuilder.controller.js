@@ -82,21 +82,33 @@ sap.ui.define([
 
 		onAddTable: function(oEvent) {
 
+			function getUnique(a) {
+				var seen = {};
+				return a.filter(function(item) {
+					return seen.hasOwnProperty(item) ? false : (seen[item] = true);
+				});
+			}
+
 			var dialog = new Dialog({
-				title: 'Add Table',
+				title: 'Add Table(s)',
 				type: 'Message',
+				contentWidth: "380px",
 				draggable: true,
 				content: [
-					new sap.m.MultiInput('idTabname', {
-						placeholder: "Table Name",
+					new sap.m.Input('idTabname', {
+						placeholder: "Table Name(s)",
 						required: true,
-						maxLength: 30,
+						width: "350px",
+						// maxLength: 30,
+						showValueHelp: false,
 						valueLiveUpdate: true,
 						liveChange: function(oEvent) {
 							var sText = oEvent.getParameter('value');
 							var oParent = oEvent.getSource().getParent();
 							if (sText.length > 0) {
 								oParent.getBeginButton().setEnabled(true);
+							} else {
+								oParent.getBeginButton().setEnabled(false);
 							}
 							if (oEvent.getSource().getValue()) {
 								oEvent.getSource().setValue(oEvent.getSource().getValue().trim().toUpperCase());
@@ -106,14 +118,42 @@ sap.ui.define([
 						submit: function(oEvent) {
 							var sTabname = oEvent.getSource().getValue();
 							var sAlias = sap.ui.getCore().byId('idAlias').getValue();
-							this.getTableFields(sTabname, sAlias);
+							if (sTabname === "") {
+								this._showMessage("Please enter a table name", true);
+								return;
+							}
+
 							dialog.close();
+
+							sap.ui.core.BusyIndicator.show();
+
+							var aTables = sTabname.split(",");
+							var aAlias = sAlias.split(",");
+
+							aTables = getUnique(aTables);
+							aAlias = getUnique(aAlias);
+
+							for (var i = 0; i < aTables.length; i++) {
+								sAlias = "";
+
+								if (aAlias[i]) {
+									sAlias = aAlias[i];
+								}
+
+								if (aTables[i] !== "") {
+									this.getTableFields(aTables[i], sAlias);
+								}
+							}
+
+							sap.ui.core.BusyIndicator.hide();
+
 						}.bind(this)
 					}),
-					new Input('idAlias', {
+					new sap.m.Input('idAlias', {
 						placeholder: "Alias",
 						required: true,
-						maxLength: 10,
+						width: "350px",
+						// maxLength: 10,
 						liveChange: function(oEvent) {
 							if (oEvent.getSource().getValue()) {
 								oEvent.getSource().setValue(oEvent.getSource().getValue().trim().toUpperCase());
@@ -123,8 +163,31 @@ sap.ui.define([
 						submit: function(oEvent) {
 							var sTabname = sap.ui.getCore().byId('idTabname').getValue();
 							var sAlias = sap.ui.getCore().byId('idAlias').getValue();
-							this.getTableFields(sTabname, sAlias);
+
 							dialog.close();
+
+							sap.ui.core.BusyIndicator.show();
+
+							var aTables = sTabname.split(",");
+							var aAlias = sAlias.split(",");
+
+							aTables = getUnique(aTables);
+							aAlias = getUnique(aAlias);
+
+							for (var i = 0; i < aTables.length; i++) {
+								sAlias = "";
+
+								if (aAlias[i]) {
+									sAlias = aAlias[i];
+								}
+
+								if (aTables[i] !== "") {
+									this.getTableFields(aTables[i], sAlias);
+								}
+							}
+
+							sap.ui.core.BusyIndicator.hide();
+
 						}.bind(this)
 					})
 				],
@@ -134,8 +197,31 @@ sap.ui.define([
 					press: function() {
 						var sTabname = sap.ui.getCore().byId('idTabname').getValue();
 						var sAlias = sap.ui.getCore().byId('idAlias').getValue();
-						this.getTableFields(sTabname, sAlias);
+
 						dialog.close();
+
+						sap.ui.core.BusyIndicator.show();
+
+						var aTables = sTabname.split(",");
+						var aAlias = sAlias.split(",");
+
+						aTables = getUnique(aTables);
+						aAlias = getUnique(aAlias);
+
+						for (var i = 0; i < aTables.length; i++) {
+							sAlias = "";
+
+							if (aAlias[i]) {
+								sAlias = aAlias[i];
+							}
+
+							if (aTables[i] !== "") {
+								this.getTableFields(aTables[i], sAlias);
+							}
+						}
+
+						sap.ui.core.BusyIndicator.hide();
+
 					}.bind(this)
 				}),
 				endButton: new Button({
@@ -148,6 +234,8 @@ sap.ui.define([
 					dialog.destroy();
 				}
 			});
+
+			this.getView().addDependent(dialog);
 
 			dialog.open();
 		},
@@ -164,7 +252,7 @@ sap.ui.define([
 			this.getView().getModel().read("/FieldNamesSet", {
 				filters: afilters,
 				success: function(oData) {
-					sap.ui.core.BusyIndicator.hide();
+					// sap.ui.core.BusyIndicator.hide();
 					this.createTableBoxes(sTabname, sAlias, oData.results);
 				}.bind(this),
 
@@ -172,7 +260,7 @@ sap.ui.define([
 					sap.ui.core.BusyIndicator.hide();
 					var sMsg = "Table " + sTabname + " does not exists";
 					sap.m.MessageToast.show(sMsg);
-				}.bind(this)
+				}
 			});
 
 		},
@@ -1149,8 +1237,8 @@ sap.ui.define([
 
 				var aJoins = this.getView().getModel("oModelJoins").getData();
 
-				// is the type of the joins between the tables inconsistent?
-				// = Are there other joins towards the right table of different type?
+				// // is the type of the joins between the tables inconsistent?
+				// // = Are there other joins towards the right table of different type?
 				for (var i = 0; i < aJoins.length; i++) {
 					if (aJoins[i].RTabname === oRightData.Tabname) {
 						if (!(aJoins[i].LTabname === oLeftData.Tabname &&
@@ -1626,7 +1714,7 @@ sap.ui.define([
 
 			var oSelect1 = new sap.m.Select("idTable1", {
 				name: "Table 1",
-				width: "140px",
+				width: "190px",
 				items: {
 					path: "oModelTables>/",
 					template: oSelectItem1,
@@ -1637,7 +1725,7 @@ sap.ui.define([
 
 			var oSelect2 = new sap.m.Select("idTable2", {
 				name: "Table 1",
-				width: "140px",
+				width: "190px",
 				selectedKey: aTables[1].Tabname,
 				items: {
 					path: "oModelTables>/",
@@ -1680,7 +1768,7 @@ sap.ui.define([
 
 						var iRank1 = this._getIndexByKey("Tabname", sTable1, aTables);
 						var iRank2 = this._getIndexByKey("Tabname", sTable2, aTables);
-						
+
 						if (iRank1 < iRank2) {
 							var sLTable = sTable1;
 							var sRTable = sTable2;
@@ -1688,7 +1776,7 @@ sap.ui.define([
 							sLTable = sTable2;
 							sRTable = sTable1;
 						}
-						
+
 						//Hit Backend to get join condition
 						this._proposeJoins(sLTable, sRTable);
 
@@ -2065,9 +2153,9 @@ sap.ui.define([
 				for (var j in mData.Joins) {
 					if (mData.Joins[j].RTabname === sTabname) {
 						//If more condition, putting AND in the end
-						if (bFlag) {
-							sCondition = sCondition + " AND\n";
-						}
+						// if (bFlag) {
+						// 	sCondition = sCondition + " AND\n";
+						// }
 
 						var sLAlias = this._searchArraybyKey("Tabname", mData.Joins[j].LTabname, mData.Tables).Alias.toLowerCase();
 						var sRAlias = this._searchArraybyKey("Tabname", mData.Joins[j].RTabname, mData.Tables).Alias.toLowerCase();
@@ -2075,8 +2163,16 @@ sap.ui.define([
 						var sLTab = (sLAlias === "" ? mData.Joins[j].LTabname : sLAlias).toLowerCase();
 						var sRTab = (sRAlias === "" ? mData.Joins[j].RTabname : sRAlias).toLowerCase();
 
-						sCondition = sCondition + "\tON " + sLTab + "~" + mData.Joins[j].LFieldname.toLowerCase() + " = " + sRTab + "~" + mData.Joins[j]
-							.RFieldname.toLowerCase();
+						//For multiple fields in the ON Condition
+						if (bFlag) {
+							sCondition = sCondition + " AND\n\t\t" + sLTab + "~" + mData.Joins[j].LFieldname.toLowerCase() + " = " + sRTab + "~" + mData.Joins[
+									j]
+								.RFieldname.toLowerCase();
+						} else {
+							sCondition = sCondition + "\t ON " + sLTab + "~" + mData.Joins[j].LFieldname.toLowerCase() + " = " + sRTab + "~" + mData.Joins[
+									j]
+								.RFieldname.toLowerCase();
+						}
 
 						bFlag = true;
 					}

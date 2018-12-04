@@ -27,7 +27,7 @@
 				<l:Splitter height="100%" width="100%" orientation="Vertical">
 					<Panel height="100%" width="auto">
 						<layoutData><l:SplitterLayoutData size="40%"/></layoutData>
-						<code:CodeEditor id="idOutputCode" height="800px" width="350px" lineNumbers="true" type="abap" editable="false" valueSelection="false"></code:CodeEditor>
+						<code:CodeEditor id="idOutputCode" height="800px" width="420px" lineNumbers="true" type="abap" editable="false" valueSelection="false"></code:CodeEditor>
 					</Panel>
 					<Panel height="100%" width="auto" class="sapUiSizeCompact" headerText="Manage Output Fields">
 						<layoutData><l:SplitterLayoutData size="60%"/></layoutData>

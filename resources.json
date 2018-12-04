@@ -1,14 +1,21 @@
 {
     "resources": [
         {
-            "name": "manifest.json"
+            "name": "resources.json",
+            "merged": true
+        },
+        {
+            "name": "model/models.js"
+        },
+        {
+            "name": "i18n/i18n.properties",
+            "raw": "i18n/i18n.properties"
         },
         {
             "name": "index.html"
         },
         {
-            "name": "i18n/i18n.properties",
-            "raw": "i18n/i18n.properties"
+            "name": "css/style.css"
         },
         {
             "name": "view/Main.view.xml"
@@ -17,29 +24,35 @@
             "name": "view/QueryBuilder.view.xml"
         },
         {
-            "name": "util/util.js"
+            "name": "manifest.json"
         },
         {
-            "name": "util/formatter.js"
+            "name": "Component-preload.js",
+            "merged": true
         },
         {
-            "name": "css/style.css"
-        },
-        {
-            "name": "controller/QueryBuilder.controller.js"
-        },
-        {
-            "name": "localService/metadata.xml"
+            "name": ".user.project.json"
         },
         {
             "name": "Component.js"
         },
         {
-            "name": "model/models.js"
+            "name": "localService/metadata.xml"
         },
         {
-            "name": "Component-preload.js",
-            "merged": true
+            "name": "util/formatter.js"
+        },
+        {
+            "name": "util/util.js"
+        },
+        {
+            "name": "controller/QueryBuilder.controller.js"
+        },
+        {
+            "name": ".project.json"
+        },
+        {
+            "name": "TestFile"
         },
         {
             "name": "neo-app.json"
