@@ -143,7 +143,7 @@ sap.ui.define([
 								if (aTables[i] !== "") {
 									this.getTableFields(aTables[i], sAlias);
 								}
-							}
+							} 
 
 							sap.ui.core.BusyIndicator.hide();
 

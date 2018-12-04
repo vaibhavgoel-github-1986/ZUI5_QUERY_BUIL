@@ -15,7 +15,7 @@
     "sap.watt.uitools.ide.fiori"
   ],
   "build": {
-    "buildRequired": false,
+    "buildRequired": true,
     "targetFolder": "dist",
     "lastBuildDateTime": "Tue, 04 Dec 2018 05:24:03 GMT"
   }
